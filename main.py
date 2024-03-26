@@ -32,9 +32,4 @@ for cog in os.listdir("./cogs"):
 
 Base.metadata.create_all(bind=client.engine)
 
-settings = None
-
-with open("settings.json") as f:
-    settings = json.load(f)
-
-client.run(settings["token"])
+client.run(client.settings["token"])
