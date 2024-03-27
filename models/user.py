@@ -1,7 +1,6 @@
 from models.base import Base
 from sqlalchemy import String, Integer
 from sqlalchemy.orm import Mapped, mapped_column
-from uuid import uuid4
 
 
 class User(Base):

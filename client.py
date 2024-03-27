@@ -1,5 +1,3 @@
-from asyncio import AbstractEventLoop
-from typing import Any
 from discord import Bot
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -13,7 +11,6 @@ def load_settings():
 
 class LunaClient(Bot):
     def __init__(self, description=None, *args, **options):
-
         self.settings = load_settings()
 
         self.engine = create_engine(self.settings["postgres"])

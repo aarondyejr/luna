@@ -2,8 +2,6 @@ from discord import ApplicationContext, Intents
 import os
 from client import LunaClient
 from models.base import Base
-from models.user import User
-import json
 
 intents = Intents()
 intents.members = True

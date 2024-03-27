@@ -1,7 +1,6 @@
 from discord.ext.commands import Cog
 from discord import (
     ApplicationContext,
-    slash_command,
     SlashCommandGroup,
     SlashCommandOptionType,
     Option,
@@ -12,13 +11,11 @@ from sqlalchemy import text
 
 
 class Public(Cog):
-
     group = SlashCommandGroup(
         "public", "List of public commands", guild_ids=[957867801119449109]
     )
 
     def __init__(self, client: LunaClient):
-
         self.client = client
 
     @group.command(
@@ -34,7 +31,7 @@ class Public(Cog):
             )
         ).first()
 
-        if result[0] == True:
+        if result[0]:
             return await ctx.respond("An account already exists for your discord user.")
 
         new_user = User(id=str(ctx.author.id), balance=1000)
