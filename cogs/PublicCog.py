@@ -50,8 +50,7 @@ class Public(Cog):
             SlashCommandOptionType.user, "Who do you want to view", required=False
         ),  # type: ignore
     ):
-        if user is None:
-            user = ctx.author
+        user = user or ctx.author
 
         profile = self.client.session().query(User).filter_by(id=str(user.id)).first()
 
