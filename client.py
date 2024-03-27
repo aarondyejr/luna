@@ -10,6 +10,8 @@ def load_settings():
 
 
 class LunaClient(Bot):
+    __slots__ = ("settings", "engine", "session")
+
     def __init__(self, description=None, *args, **options):
         self.settings = load_settings()
 

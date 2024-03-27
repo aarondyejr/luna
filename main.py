@@ -20,12 +20,9 @@ async def hello(ctx: ApplicationContext):
     await ctx.respond(f"Hello {ctx.author.name}")
 
 
-for cog in os.listdir("./cogs"):
-    if cog.endswith(".py"):
-        client.load_extension(f"cogs.{cog[:-3]}")
-        print(f"Loaded cog.{cog[:-3]}")
-    else:
-        continue
+for cog in filter(lambda cog: cog.endswith(".py"), os.listdir("./cogs")):
+    client.load_extension(f"cogs.{cog[:-3]}")
+    print(f"Loaded cog.{cog[:-3]}")
 
 
 Base.metadata.create_all(bind=client.engine)
