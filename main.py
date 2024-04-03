@@ -2,6 +2,8 @@ from discord import ApplicationContext, Intents
 import os
 from client import LunaClient
 from models.base import Base
+from models.guild import Guild
+from models.user import User
 
 intents = Intents()
 intents.members = True
@@ -25,6 +27,8 @@ for cog in filter(lambda cog: cog.endswith(".py"), os.listdir("./cogs")):
     print(f"Loaded cog.{cog[:-3]}")
 
 
-Base.metadata.create_all(bind=client.engine)
+tables = [Guild.__table__, User.__table__]
+
+Base.metadata.create_all(bind=client.engine, tables=tables)
 
 client.run(client.settings["token"])

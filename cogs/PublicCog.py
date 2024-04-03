@@ -27,18 +27,18 @@ class Public(Cog):
 
         result = transaction.execute(
             text("SELECT EXISTS(SELECT 1 FROM public.user WHERE id=:id)").bindparams(
-                id=str(ctx.author.id)
+                id=ctx.author.id
             )
         ).first()
 
         if result[0]:
             return await ctx.respond("An account already exists for your discord user.")
 
-        new_user = User(id=str(ctx.author.id), balance=1000)
+        new_user = User(id=ctx.author.id)
 
         transaction.add(new_user)
 
-        await transaction.commit()
+        transaction.commit()
 
         await ctx.respond("Created a user for you!")
 
@@ -52,12 +52,12 @@ class Public(Cog):
     ):
         user = user or ctx.author
 
-        profile = self.client.session().query(User).filter_by(id=str(user.id)).first()
+        profile = self.client.session().query(User).filter_by(id=user.id).first()
 
         if profile is None:
             return await ctx.respond(f"There was no profile for {user.name}")
 
-        await ctx.respond(f"{profile}")
+        await ctx.respond(f"`{profile}`")
 
 
 def setup(client: LunaClient):
